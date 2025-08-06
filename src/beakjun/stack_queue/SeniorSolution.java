@@ -1,0 +1,44 @@
+package beakjun.stack_queue;
+
+import java.util.Stack;
+
+public class SeniorSolution {
+    public static void main(String[] args) {
+        Queue q = new Queue();
+    }
+}
+class Queue {
+    private Stack<Integer> stackIn;
+    private Stack<Integer> stackOut;
+
+    public Queue() {
+        stackIn = new Stack<>();
+        stackOut = new Stack<>();
+    }
+
+    public void push(int x) {
+        stackIn.push(x);
+    }
+
+    public int pop() {
+        if (stackOut.isEmpty()) {
+            while (!stackIn.isEmpty()) {
+                stackOut.push(stackIn.pop());
+            }
+        }
+        return stackOut.pop();
+    }
+
+    public int peek() {
+        if (stackOut.isEmpty()) {
+            while (!stackIn.isEmpty()) {
+                stackOut.push(stackIn.pop());
+            }
+        }
+        return stackOut.peek();
+    }
+
+    public boolean empty() {
+        return stackIn.isEmpty() && stackOut.isEmpty();
+    }
+}
