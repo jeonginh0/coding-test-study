@@ -1,27 +1,21 @@
 package beakjun.day8;
 
-import java.util.*;
-
 public class SeniorSolution {
-    public int[] intersection(int[] nums1, int[] nums2) {
-        Set<Integer> set1 = new HashSet<>();
-        for (int num : nums1) {
-            set1.add(num);
+    public boolean digitCount(String num) {
+        int[] count = new int[10];
+
+        for (char c : num.toCharArray()) {
+            int digit = c - '0';
+            count[digit]++;
         }
 
-        Set<Integer> result = new HashSet<>();
-        for (int num : nums2) {
-            if (set1.contains(num)) {
-                result.add(num);
+        for (int i = 0; i < num.length(); i++) {
+            int expectedCount = num.charAt(i) - '0';
+            if (count[i] != expectedCount) {
+                return false;
             }
         }
 
-        int[] answer = new int[result.size()];
-        int i = 0;
-        for (int num : result) {
-            answer[i++] = num;
-        }
-
-        return answer;
+        return true;
     }
 }

@@ -1,37 +1,31 @@
 package beakjun.day8;
 
-import java.util.*;
+import java.io.*;
 
 public class MySolution {
-    public static int[] intersection(int[] nums1, int[] nums2) {
-        Set<Integer> set = new HashSet<>();
-        Set<Integer> intersectionSet = new HashSet<>();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        for (int num: nums1){
-            set.add(num);
+        String num = br.readLine();
+
+        int n = num.length();
+        int[] count = new int[10];
+
+        for (int i = 0; i < n; i++) {
+            int digit = num.charAt(i) - '0';
+            count[digit]++;
         }
 
-        for (int num: nums2){
-            if(set.contains(num)){
-                intersectionSet.add(num);
+        boolean isValid = true;
+        for (int i = 0; i < n; i++) {
+            int expected = num.charAt(i) - '0';
+
+            if (count[i] != expected) {
+                isValid = false;
+                break;
             }
         }
 
-        int[] result = new int[intersectionSet.size()];
-        int i = 0;
-        for (int num: intersectionSet){
-            result[i++] = num;
-        }
-
-        Arrays.sort(result);
-        return result;
-    }
-
-    public static void main(String[] args) {
-        int[] nums1 = {1,2,2,1};
-        int[] nums2 = {2,2};
-
-        int[] result = intersection(nums1, nums2);
-        System.out.println(Arrays.toString(result));
+        System.out.println(isValid);
     }
 }
